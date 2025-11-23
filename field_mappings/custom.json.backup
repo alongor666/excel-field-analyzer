@@ -1,0 +1,74 @@
+{
+  "domain": "custom",
+  "description": "用户自定义字段映射",
+  "version": "1.0",
+  "mappings": {
+    "投保确认时间": {
+      "en_name": "policy_signing_date",
+      "group": "time",
+      "dtype": "datetime",
+      "description": "保单签单日期"
+    },
+    "险类": {
+      "en_name": "insurance_category",
+      "group": "product",
+      "dtype": "string",
+      "description": "保险产品类别"
+    },
+    "新旧车": {
+      "en_name": "vehicle_age_status",
+      "group": "vehicle",
+      "dtype": "string",
+      "description": "车辆新旧状态（新车/旧车）"
+    },
+    "交三/主全": {
+      "en_name": "coverage_type",
+      "group": "product",
+      "dtype": "string",
+      "description": "险别组合（主全/交三/单交）"
+    },
+    "是否续保": {
+      "en_name": "is_renewal",
+      "group": "flag",
+      "dtype": "boolean",
+      "description": "是否为续保保单"
+    },
+    "车险分等级": {
+      "en_name": "vehicle_insurance_grade",
+      "group": "product",
+      "dtype": "string",
+      "description": "车险评级（A/B/C/D/E/F/G/X）"
+    },
+    "车牌归属": {
+      "en_name": "license_plate_region",
+      "group": "vehicle",
+      "dtype": "string",
+      "description": "车牌归属地区"
+    },
+    "4S集团": {
+      "en_name": "dealer_4s_group",
+      "group": "partner",
+      "dtype": "string",
+      "description": "4S店集团名称"
+    },
+    "总费用金额": {
+      "en_name": "total_expense_amount_yuan",
+      "group": "finance",
+      "dtype": "number",
+      "description": "总费用金额（元），可能包含负数"
+    },
+    "保费": {
+      "en_name": "signed_premium_yuan",
+      "group": "finance",
+      "dtype": "number",
+      "description": "签单保费（元）"
+    },
+    "NCD基准保费": {
+      "en_name": "ncd_base_premium_yuan",
+      "group": "finance",
+      "dtype": "number",
+      "description": "NCD（无赔款优待）基准保费（元）"
+    }
+  },
+  "learn_history": []
+}

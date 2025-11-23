@@ -1,0 +1,599 @@
+{
+  "domain": "auto_insurance",
+  "description": "车险业务字段映射库（基于标准字段映射表v1.0）",
+  "version": "2.0",
+  "source": "字段映射表.json",
+  "updated_at": "2025-11-23",
+  "mappings": {
+    "快照日期": {
+      "en_name": "snapshot_date",
+      "group": "time",
+      "dtype": "string",
+      "description": "快照日期",
+      "format": "YYYY-MM-DD",
+      "source": "CSV/Supabase"
+    },
+    "保单年度": {
+      "en_name": "policy_start_year",
+      "group": "time",
+      "dtype": "number",
+      "description": "保单年度",
+      "format": "int",
+      "source": "CSV/Supabase"
+    },
+    "周序号": {
+      "en_name": "week_number",
+      "group": "time",
+      "dtype": "number",
+      "description": "周序号",
+      "format": "int",
+      "source": "CSV/Supabase"
+    },
+    "地域属性": {
+      "en_name": "chengdu_branch",
+      "group": "organization",
+      "dtype": "string",
+      "description": "地域属性",
+      "format": "enum",
+      "source": "CSV/Supabase"
+    },
+    "二级机构": {
+      "en_name": "second_level_organization",
+      "group": "organization",
+      "dtype": "string",
+      "description": "二级机构",
+      "format": "text",
+      "source": "CSV/Supabase"
+    },
+    "三级机构": {
+      "en_name": "third_level_organization",
+      "group": "organization",
+      "dtype": "string",
+      "description": "三级机构",
+      "format": "enum",
+      "source": "CSV/Supabase"
+    },
+    "客户类型": {
+      "en_name": "customer_category_3",
+      "group": "general",
+      "dtype": "string",
+      "description": "客户类型",
+      "format": "text",
+      "source": "CSV/Supabase"
+    },
+    "保险类型": {
+      "en_name": "insurance_type",
+      "group": "product",
+      "dtype": "string",
+      "description": "保险类型",
+      "format": "enum",
+      "source": "CSV/Supabase"
+    },
+    "业务类型": {
+      "en_name": "business_type_category",
+      "group": "general",
+      "dtype": "string",
+      "description": "业务类型",
+      "format": "text",
+      "source": "CSV/Supabase"
+    },
+    "险别组合": {
+      "en_name": "coverage_type",
+      "group": "product",
+      "dtype": "string",
+      "description": "险别组合",
+      "format": "enum",
+      "source": "CSV/Supabase"
+    },
+    "新续转状态": {
+      "en_name": "renewal_status",
+      "group": "general",
+      "dtype": "string",
+      "description": "新续转状态",
+      "format": "enum",
+      "source": "CSV/Supabase"
+    },
+    "是否新能源": {
+      "en_name": "is_new_energy_vehicle",
+      "group": "vehicle",
+      "dtype": "string",
+      "description": "新能源",
+      "format": "bool",
+      "source": "CSV/Supabase"
+    },
+    "是否过户车": {
+      "en_name": "is_transferred_vehicle",
+      "group": "vehicle",
+      "dtype": "string",
+      "description": "过户车",
+      "format": "bool",
+      "source": "CSV/Supabase"
+    },
+    "车险评级": {
+      "en_name": "vehicle_insurance_grade",
+      "group": "vehicle",
+      "dtype": "string",
+      "description": "车险评级",
+      "format": "enum",
+      "source": "CSV/Supabase"
+    },
+    "高速风险等级": {
+      "en_name": "highway_risk_grade",
+      "group": "vehicle",
+      "dtype": "string",
+      "description": "高速风险等级",
+      "format": "enum",
+      "source": "CSV/Supabase"
+    },
+    "大货车评分": {
+      "en_name": "large_truck_score",
+      "group": "vehicle",
+      "dtype": "string",
+      "description": "大货车评分",
+      "format": "enum",
+      "source": "CSV/Supabase"
+    },
+    "小货车评分": {
+      "en_name": "small_truck_score",
+      "group": "vehicle",
+      "dtype": "string",
+      "description": "小货车评分",
+      "format": "enum",
+      "source": "CSV/Supabase"
+    },
+    "终端来源": {
+      "en_name": "terminal_source",
+      "group": "general",
+      "dtype": "string",
+      "description": "终端来源",
+      "format": "text",
+      "source": "CSV/Supabase"
+    },
+    "签单保费（元）": {
+      "en_name": "signed_premium_yuan",
+      "group": "finance",
+      "dtype": "number",
+      "description": "签单保费",
+      "format": "currency_yuan",
+      "source": "CSV/Supabase"
+    },
+    "满期保费（元）": {
+      "en_name": "matured_premium_yuan",
+      "group": "finance",
+      "dtype": "number",
+      "description": "满期保费",
+      "format": "currency_yuan",
+      "source": "CSV/Supabase"
+    },
+    "保单件数": {
+      "en_name": "policy_count",
+      "group": "general",
+      "dtype": "number",
+      "description": "保单件数(件)",
+      "format": "int",
+      "source": "CSV/Supabase"
+    },
+    "赔案件数": {
+      "en_name": "claim_case_count",
+      "group": "finance",
+      "dtype": "number",
+      "description": "赔案件数(件)",
+      "format": "int",
+      "source": "CSV/Supabase"
+    },
+    "已报告赔款（元）": {
+      "en_name": "reported_claim_payment_yuan",
+      "group": "finance",
+      "dtype": "number",
+      "description": "已报告赔款",
+      "format": "currency_yuan",
+      "source": "CSV/Supabase"
+    },
+    "费用金额（元）": {
+      "en_name": "expense_amount_yuan",
+      "group": "finance",
+      "dtype": "number",
+      "description": "费用额",
+      "format": "currency_yuan",
+      "source": "CSV/Supabase"
+    },
+    "商业险折前保费（元）": {
+      "en_name": "commercial_premium_before_discount_yuan",
+      "group": "finance",
+      "dtype": "number",
+      "description": "折前保费",
+      "format": "currency_yuan",
+      "source": "CSV/Supabase"
+    },
+    "保费计划（元）": {
+      "en_name": "premium_plan_yuan",
+      "group": "finance",
+      "dtype": "number",
+      "description": "年度保费目标",
+      "format": "currency_yuan|null",
+      "source": "CSV/Supabase/目标管理"
+    },
+    "边际贡献额（元）": {
+      "en_name": "marginal_contribution_amount_yuan",
+      "group": "finance",
+      "dtype": "number",
+      "description": "边际贡献额",
+      "format": "currency_yuan",
+      "source": "CSV/Supabase"
+    },
+    "满期赔付率": {
+      "en_name": "loss_ratio",
+      "group": "finance",
+      "dtype": "number",
+      "description": "赔付率(%)",
+      "format": "percent",
+      "source": "计算引擎"
+    },
+    "费用率": {
+      "en_name": "expense_ratio",
+      "group": "finance",
+      "dtype": "number",
+      "description": "费用率(%)",
+      "format": "percent",
+      "source": "计算引擎"
+    },
+    "满期率": {
+      "en_name": "maturity_ratio",
+      "group": "general",
+      "dtype": "number",
+      "description": "满期率(%)",
+      "format": "percent",
+      "source": "计算引擎"
+    },
+    "满期边际贡献率": {
+      "en_name": "contribution_margin_ratio",
+      "group": "finance",
+      "dtype": "number",
+      "description": "边贡率(%)",
+      "format": "percent",
+      "source": "计算引擎"
+    },
+    "变动成本率": {
+      "en_name": "variable_cost_ratio",
+      "group": "finance",
+      "dtype": "number",
+      "description": "变动成本率(%)",
+      "format": "percent",
+      "source": "计算引擎"
+    },
+    "满期出险率": {
+      "en_name": "matured_claim_ratio",
+      "group": "finance",
+      "dtype": "number",
+      "description": "出险率(%)",
+      "format": "percent",
+      "source": "计算引擎"
+    },
+    "商业险自主系数": {
+      "en_name": "autonomy_coefficient",
+      "group": "general",
+      "dtype": "number",
+      "description": "自主系数",
+      "format": "decimal",
+      "source": "计算引擎"
+    },
+    "保费达成率": {
+      "en_name": "premium_progress",
+      "group": "finance",
+      "dtype": "number",
+      "description": "达成率(%)",
+      "format": "percent",
+      "source": "计算引擎"
+    },
+    "保费时间进度达成率": {
+      "en_name": "premium_time_progress_achievement_rate",
+      "group": "finance",
+      "dtype": "number",
+      "description": "时间进度达成率(%)",
+      "format": "percent",
+      "source": "计算引擎"
+    },
+    "件数时间进度达成率": {
+      "en_name": "policy_count_time_progress_achievement_rate",
+      "group": "general",
+      "dtype": "number",
+      "description": "件数进度达成率(%)",
+      "format": "percent",
+      "source": "计算引擎"
+    },
+    "签单保费(万元)": {
+      "en_name": "signed_premium",
+      "group": "finance",
+      "dtype": "number",
+      "description": "签单保费(万)",
+      "format": "currency_wan_int",
+      "source": "计算引擎"
+    },
+    "满期保费(万元)": {
+      "en_name": "matured_premium",
+      "group": "finance",
+      "dtype": "number",
+      "description": "满期保费(万)",
+      "format": "currency_wan_int",
+      "source": "计算引擎"
+    },
+    "已报告赔款(万元)": {
+      "en_name": "reported_claim_payment",
+      "group": "finance",
+      "dtype": "number",
+      "description": "已报告赔款(万)",
+      "format": "currency_wan_int",
+      "source": "计算引擎"
+    },
+    "费用额(万元)": {
+      "en_name": "expense_amount",
+      "group": "finance",
+      "dtype": "number",
+      "description": "费用额(万)",
+      "format": "currency_wan_int",
+      "source": "计算引擎"
+    },
+    "边际贡献额(万元)": {
+      "en_name": "contribution_margin_amount",
+      "group": "finance",
+      "dtype": "number",
+      "description": "边际贡献额(万)",
+      "format": "currency_wan_int",
+      "source": "计算引擎"
+    },
+    "年度保费目标(万元)": {
+      "en_name": "annual_premium_target",
+      "group": "finance",
+      "dtype": "number",
+      "description": "年度保费目标(万)",
+      "format": "currency_wan_int",
+      "source": "计算引擎/目标管理"
+    },
+    "年度件数目标(件)": {
+      "en_name": "annual_policy_count_target",
+      "group": "general",
+      "dtype": "number",
+      "description": "年度件数目标",
+      "format": "int",
+      "source": "计算引擎/目标管理"
+    },
+    "单均保费(元)": {
+      "en_name": "average_premium",
+      "group": "finance",
+      "dtype": "number",
+      "description": "单均保费",
+      "format": "currency_yuan_int",
+      "source": "计算引擎"
+    },
+    "案均赔款(元)": {
+      "en_name": "average_claim",
+      "group": "finance",
+      "dtype": "number",
+      "description": "案均赔款",
+      "format": "currency_yuan_int",
+      "source": "计算引擎"
+    },
+    "单均费用(元)": {
+      "en_name": "average_expense",
+      "group": "finance",
+      "dtype": "number",
+      "description": "单均费用",
+      "format": "currency_yuan_int",
+      "source": "计算引擎"
+    },
+    "单均边贡额(元)": {
+      "en_name": "average_contribution",
+      "group": "finance",
+      "dtype": "number",
+      "description": "单均边贡额",
+      "format": "currency_yuan_int",
+      "source": "计算引擎"
+    },
+    "签单保费(万)": {
+      "en_name": "signed_premium_10k",
+      "group": "finance",
+      "dtype": "number",
+      "description": "签单(万)",
+      "format": "currency_wan_int",
+      "source": "计算引擎/图表序列"
+    },
+    "满期保费(万)": {
+      "en_name": "matured_premium_10k",
+      "group": "finance",
+      "dtype": "number",
+      "description": "满期(万)",
+      "format": "currency_wan_int",
+      "source": "计算引擎/图表序列"
+    },
+    "赔付率(%)": {
+      "en_name": "loss_ratio_visual",
+      "group": "finance",
+      "dtype": "number",
+      "description": "赔付率(%)",
+      "format": "percent",
+      "source": "计算引擎/图表序列"
+    },
+    "日期范围": {
+      "en_name": "chart_date_range",
+      "group": "time",
+      "dtype": "string",
+      "description": "日期范围",
+      "format": "MM/DD-MM/DD",
+      "source": "date_utils"
+    },
+    "总赔款(万)": {
+      "en_name": "reported_claim_payment",
+      "group": "finance",
+      "dtype": "number",
+      "description": "总赔款(万)（别名）",
+      "format": "currency_wan_int",
+      "source": "计算引擎"
+    },
+    "总赔款（万）": {
+      "en_name": "reported_claim_payment",
+      "group": "finance",
+      "dtype": "number",
+      "description": "总赔款（万）（别名）",
+      "format": "currency_wan_int",
+      "source": "计算引擎"
+    },
+    "已报告赔款(万)": {
+      "en_name": "reported_claim_payment",
+      "group": "finance",
+      "dtype": "number",
+      "description": "已报告赔款(万)（别名）",
+      "format": "currency_wan_int",
+      "source": "计算引擎"
+    },
+    "已报告赔款（万）": {
+      "en_name": "reported_claim_payment",
+      "group": "finance",
+      "dtype": "number",
+      "description": "已报告赔款（万）（别名）",
+      "format": "currency_wan_int",
+      "source": "计算引擎"
+    },
+    "签单保费（万）": {
+      "en_name": "signed_premium",
+      "group": "finance",
+      "dtype": "number",
+      "description": "签单保费（万）（别名）",
+      "format": "currency_wan_int",
+      "source": "计算引擎"
+    },
+    "满期保费（万）": {
+      "en_name": "matured_premium",
+      "group": "finance",
+      "dtype": "number",
+      "description": "满期保费（万）（别名）",
+      "format": "currency_wan_int",
+      "source": "计算引擎"
+    },
+    "费用额(万)": {
+      "en_name": "expense_amount",
+      "group": "finance",
+      "dtype": "number",
+      "description": "费用额(万)（别名）",
+      "format": "currency_wan_int",
+      "source": "计算引擎"
+    },
+    "费用额（万）": {
+      "en_name": "expense_amount",
+      "group": "finance",
+      "dtype": "number",
+      "description": "费用额（万）（别名）",
+      "format": "currency_wan_int",
+      "source": "计算引擎"
+    },
+    "边际贡献额(万)": {
+      "en_name": "contribution_margin_amount",
+      "group": "finance",
+      "dtype": "number",
+      "description": "边际贡献额(万)（别名）",
+      "format": "currency_wan_int",
+      "source": "计算引擎"
+    },
+    "边际贡献额（万）": {
+      "en_name": "contribution_margin_amount",
+      "group": "finance",
+      "dtype": "number",
+      "description": "边际贡献额（万）（别名）",
+      "format": "currency_wan_int",
+      "source": "计算引擎"
+    },
+    "三级机构1": {
+      "en_name": "third_level_organization",
+      "group": "organization",
+      "dtype": "string",
+      "description": "三级机构1（别名）",
+      "format": "enum",
+      "source": "CSV/Supabase"
+    },
+    "保单件数(件)": {
+      "en_name": "policy_count",
+      "group": "general",
+      "dtype": "number",
+      "description": "保单件数(件)（别名）",
+      "format": "int",
+      "source": "CSV/Supabase"
+    },
+    "保单件数（件）": {
+      "en_name": "policy_count",
+      "group": "general",
+      "dtype": "number",
+      "description": "保单件数（件）（别名）",
+      "format": "int",
+      "source": "CSV/Supabase"
+    },
+    "赔案件数(件)": {
+      "en_name": "claim_case_count",
+      "group": "finance",
+      "dtype": "number",
+      "description": "赔案件数(件)（别名）",
+      "format": "int",
+      "source": "CSV/Supabase"
+    },
+    "赔案件数（件）": {
+      "en_name": "claim_case_count",
+      "group": "finance",
+      "dtype": "number",
+      "description": "赔案件数（件）（别名）",
+      "format": "int",
+      "source": "CSV/Supabase"
+    }
+  },
+  "keywords": {
+    "numeric": [
+      "保费",
+      "金额",
+      "赔款",
+      "费用",
+      "件数",
+      "评分",
+      "系数",
+      "率",
+      "(万)",
+      "（万）",
+      "(元)",
+      "（元）",
+      "数量",
+      "贡献"
+    ],
+    "datetime": [
+      "日期",
+      "时间",
+      "年度",
+      "周序号",
+      "快照"
+    ],
+    "organization": [
+      "机构",
+      "地域"
+    ],
+    "finance": [
+      "保费",
+      "赔款",
+      "费用",
+      "贡献",
+      "率",
+      "系数"
+    ],
+    "product": [
+      "险",
+      "险类",
+      "险种",
+      "险别",
+      "保险"
+    ],
+    "flag": [
+      "是否"
+    ],
+    "vehicle": [
+      "车",
+      "评分",
+      "等级",
+      "新能源",
+      "过户"
+    ]
+  }
+}

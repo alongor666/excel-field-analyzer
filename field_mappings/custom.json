@@ -1,0 +1,779 @@
+{
+  "domain": "custom",
+  "description": "用户自定义字段映射",
+  "version": "1.0",
+  "mappings": {
+    "刷新时间": {
+      "en_name": "time_refresh",
+      "group": "time",
+      "dtype": "datetime",
+      "description": "刷新时间 [组:time, 类型:datetime]"
+    },
+    "投保确认时间": {
+      "en_name": "time_confirm_insure",
+      "group": "time",
+      "dtype": "datetime",
+      "description": "投保确认时间 [组:time, 类型:datetime]"
+    },
+    "保险起期": {
+      "en_name": "start_date",
+      "group": "time",
+      "dtype": "datetime",
+      "description": "保险起期 [组:time, 类型:datetime]"
+    },
+    "成都中支": {
+      "en_name": "unmapped",
+      "group": "general",
+      "dtype": "string",
+      "description": "成都中支 [组:general, 类型:string]"
+    },
+    "保单号": {
+      "en_name": "policy",
+      "group": "general",
+      "dtype": "string",
+      "description": "保单号 [组:general, 类型:string]"
+    },
+    "续保单号": {
+      "en_name": "policy",
+      "group": "general",
+      "dtype": "string",
+      "description": "续保单号 [组:general, 类型:string]"
+    },
+    "交叉销售标识": {
+      "en_name": "flag_cross_sales",
+      "group": "flag",
+      "dtype": "string",
+      "description": "交叉销售标识 [组:flag, 类型:string]"
+    },
+    "险种大类": {
+      "en_name": "insurance_type",
+      "group": "product",
+      "dtype": "string",
+      "description": "险种大类 [组:product, 类型:string]"
+    },
+    "险种名称": {
+      "en_name": "insurance_type",
+      "group": "product",
+      "dtype": "string",
+      "description": "险种名称 [组:product, 类型:string]"
+    },
+    "是否续保": {
+      "en_name": "is_renewal",
+      "group": "flag",
+      "dtype": "enum",
+      "description": "是否续保 [组:flag, 类型:enum]"
+    },
+    "支公司": {
+      "en_name": "branch",
+      "group": "organization",
+      "dtype": "string",
+      "description": "支公司 [组:organization, 类型:string]"
+    },
+    "客户类别3": {
+      "en_name": "customer",
+      "group": "general",
+      "dtype": "string",
+      "description": "客户类别3 [组:general, 类型:string]"
+    },
+    "车辆类型[新]": {
+      "en_name": "type",
+      "group": "flag",
+      "dtype": "string",
+      "description": "车辆类型[新] [组:flag, 类型:string]"
+    },
+    "车险新业务分类": {
+      "en_name": "unmapped",
+      "group": "general",
+      "dtype": "string",
+      "description": "车险新业务分类 [组:general, 类型:string]"
+    },
+    "新旧车标志": {
+      "en_name": "new_old_car",
+      "group": "flag",
+      "dtype": "string",
+      "description": "新旧车标志 [组:flag, 类型:string]"
+    },
+    "是否网约车": {
+      "en_name": "online_hailing_is",
+      "group": "flag",
+      "dtype": "enum",
+      "description": "是否网约车 [组:flag, 类型:enum]"
+    },
+    "是否异地车": {
+      "en_name": "is_non_local",
+      "group": "flag",
+      "dtype": "enum",
+      "description": "是否异地车 [组:flag, 类型:enum]"
+    },
+    "吨位分段": {
+      "en_name": "tonnage_segment",
+      "group": "vehicle",
+      "dtype": "number",
+      "description": "吨位分段 [组:vehicle, 类型:number]"
+    },
+    "精准评分等级": {
+      "en_name": "level_score",
+      "group": "general",
+      "dtype": "string",
+      "description": "精准评分等级 [组:general, 类型:string]"
+    },
+    "车险分等级": {
+      "en_name": "level",
+      "group": "general",
+      "dtype": "string",
+      "description": "车险分等级 [组:general, 类型:string]"
+    },
+    "车险分分数": {
+      "en_name": "unmapped",
+      "group": "general",
+      "dtype": "number",
+      "description": "车险分分数 [组:general, 类型:number]"
+    },
+    "货车评分": {
+      "en_name": "score_truck",
+      "group": "general",
+      "dtype": "string",
+      "description": "货车评分 [组:general, 类型:string]"
+    },
+    "货车种类": {
+      "en_name": "truck_category",
+      "group": "general",
+      "dtype": "string",
+      "description": "货车种类 [组:general, 类型:string]"
+    },
+    "业务员": {
+      "en_name": "agent",
+      "group": "organization",
+      "dtype": "string",
+      "description": "业务员 [组:organization, 类型:string]"
+    },
+    "被保险人": {
+      "en_name": "insured",
+      "group": "general",
+      "dtype": "string",
+      "description": "被保险人 [组:general, 类型:string]"
+    },
+    "被保险人年龄分组": {
+      "en_name": "insured_age_group",
+      "group": "general",
+      "dtype": "string",
+      "description": "被保险人年龄分组 [组:general, 类型:string]"
+    },
+    "被保险人证件号前六位": {
+      "en_name": "insured_id_number",
+      "group": "general",
+      "dtype": "string",
+      "description": "被保险人证件号前六位 [组:general, 类型:string]"
+    },
+    "被保险人性别": {
+      "en_name": "insured_gender",
+      "group": "general",
+      "dtype": "string",
+      "description": "被保险人性别 [组:general, 类型:string]"
+    },
+    "个代类型": {
+      "en_name": "type",
+      "group": "flag",
+      "dtype": "string",
+      "description": "个代类型 [组:flag, 类型:string]"
+    },
+    "厂牌车型名称": {
+      "en_name": "vehicle_model",
+      "group": "vehicle",
+      "dtype": "string",
+      "description": "厂牌车型名称 [组:vehicle, 类型:string]"
+    },
+    "车牌号码": {
+      "en_name": "license_plate",
+      "group": "vehicle",
+      "dtype": "string",
+      "description": "车牌号码 [组:vehicle, 类型:string]"
+    },
+    "发动机号码": {
+      "en_name": "engine_number",
+      "group": "vehicle",
+      "dtype": "string",
+      "description": "发动机号码 [组:vehicle, 类型:string]"
+    },
+    "车架号": {
+      "en_name": "vin",
+      "group": "vehicle",
+      "dtype": "string",
+      "description": "车架号 [组:vehicle, 类型:string]"
+    },
+    "行驶证车主": {
+      "en_name": "unmapped",
+      "group": "general",
+      "dtype": "string",
+      "description": "行驶证车主 [组:general, 类型:string]"
+    },
+    "车主证件号前六位": {
+      "en_name": "id_number",
+      "group": "general",
+      "dtype": "string",
+      "description": "车主证件号前六位 [组:general, 类型:string]"
+    },
+    "代理人/经纪人": {
+      "en_name": "agent_broker",
+      "group": "organization",
+      "dtype": "string",
+      "description": "代理人/经纪人 [组:organization, 类型:string]"
+    },
+    "精友车型名称": {
+      "en_name": "vehicle_model",
+      "group": "vehicle",
+      "dtype": "string",
+      "description": "精友车型名称 [组:vehicle, 类型:string]"
+    },
+    "客户源": {
+      "en_name": "customer",
+      "group": "general",
+      "dtype": "string",
+      "description": "客户源 [组:general, 类型:string]"
+    },
+    "批单号": {
+      "en_name": "endorsement",
+      "group": "general",
+      "dtype": "string",
+      "description": "批单号 [组:general, 类型:string]"
+    },
+    "批改类型": {
+      "en_name": "type_endorsement",
+      "group": "flag",
+      "dtype": "string",
+      "description": "批改类型 [组:flag, 类型:string]"
+    },
+    "单套-险别": {
+      "en_name": "unmapped",
+      "group": "product",
+      "dtype": "string",
+      "description": "单套-险别 [组:product, 类型:string]"
+    },
+    "所属性质": {
+      "en_name": "nature",
+      "group": "general",
+      "dtype": "string",
+      "description": "所属性质 [组:general, 类型:string]"
+    },
+    "投保人": {
+      "en_name": "applicant",
+      "group": "general",
+      "dtype": "string",
+      "description": "投保人 [组:general, 类型:string]"
+    },
+    "投保人证件号前六位": {
+      "en_name": "applicant_id_number",
+      "group": "general",
+      "dtype": "string",
+      "description": "投保人证件号前六位 [组:general, 类型:string]"
+    },
+    "业务来源": {
+      "en_name": "source",
+      "group": "general",
+      "dtype": "string",
+      "description": "业务来源 [组:general, 类型:string]"
+    },
+    "整备质量": {
+      "en_name": "curb_weight",
+      "group": "general",
+      "dtype": "number",
+      "description": "整备质量 [组:general, 类型:number]"
+    },
+    "新车购置价": {
+      "en_name": "purchase_price_yuan",
+      "group": "general",
+      "dtype": "number",
+      "description": "新车购置价 [组:general, 类型:number]"
+    },
+    "保单笔数": {
+      "en_name": "policy_count",
+      "group": "general",
+      "dtype": "number",
+      "description": "保单笔数 [组:general, 类型:number]"
+    },
+    "车辆使用年限": {
+      "en_name": "service_years",
+      "group": "general",
+      "dtype": "number",
+      "description": "车辆使用年限 [组:general, 类型:number]"
+    },
+    "吨位数": {
+      "en_name": "tonnage",
+      "group": "vehicle",
+      "dtype": "number",
+      "description": "吨位数 [组:vehicle, 类型:number]"
+    },
+    "建议总折扣": {
+      "en_name": "discount_coefficient",
+      "group": "finance",
+      "dtype": "number",
+      "description": "建议总折扣 [组:finance, 类型:number]"
+    },
+    "申请总折扣": {
+      "en_name": "discount_coefficient",
+      "group": "finance",
+      "dtype": "number",
+      "description": "申请总折扣 [组:finance, 类型:number]"
+    },
+    "排量": {
+      "en_name": "displacement",
+      "group": "vehicle",
+      "dtype": "number",
+      "description": "排量 [组:vehicle, 类型:number]"
+    },
+    "签单/批改保额": {
+      "en_name": "signing_endorsement_insured_amount",
+      "group": "product",
+      "dtype": "number",
+      "description": "签单/批改保额 [组:product, 类型:number]"
+    },
+    "签单/批改保费": {
+      "en_name": "premium_signing_endorsement_yuan",
+      "group": "finance",
+      "dtype": "number",
+      "description": "签单/批改保费 [组:finance, 类型:number]"
+    },
+    "签单数量": {
+      "en_name": "signing_quantity",
+      "group": "general",
+      "dtype": "number",
+      "description": "签单数量 [组:general, 类型:number]"
+    },
+    "商车自主定价系数": {
+      "en_name": "coefficient_coefficient",
+      "group": "general",
+      "dtype": "number",
+      "description": "商车自主定价系数 [组:general, 类型:number]"
+    },
+    "手续费": {
+      "en_name": "commission_yuan",
+      "group": "finance",
+      "dtype": "number",
+      "description": "手续费 [组:finance, 类型:number]"
+    },
+    "手续费比例": {
+      "en_name": "commission_ratio_yuan_percent",
+      "group": "finance",
+      "dtype": "number",
+      "description": "手续费比例 [组:finance, 类型:number]"
+    },
+    "手续费含税": {
+      "en_name": "commission_tax_included_yuan",
+      "group": "finance",
+      "dtype": "number",
+      "description": "手续费含税 [组:finance, 类型:number]"
+    },
+    "无赔款优待系数": {
+      "en_name": "coefficient_discount_yuan_coefficient",
+      "group": "finance",
+      "dtype": "number",
+      "description": "无赔款优待系数 [组:finance, 类型:number]"
+    },
+    "增值税": {
+      "en_name": "vat_yuan",
+      "group": "finance",
+      "dtype": "number",
+      "description": "增值税 [组:finance, 类型:number]"
+    },
+    "座位数": {
+      "en_name": "seats",
+      "group": "vehicle",
+      "dtype": "number",
+      "description": "座位数 [组:vehicle, 类型:number]"
+    },
+    "所属机构": {
+      "en_name": "organization",
+      "group": "organization",
+      "dtype": "string",
+      "description": "所属机构 [组:organization, 类型:string]"
+    },
+    "车辆种类": {
+      "en_name": "category",
+      "group": "general",
+      "dtype": "string",
+      "description": "车辆种类 [组:general, 类型:string]"
+    },
+    "客户名称": {
+      "en_name": "customer",
+      "group": "general",
+      "dtype": "string",
+      "description": "客户名称 [组:general, 类型:string]"
+    },
+    "车牌号": {
+      "en_name": "license_plate",
+      "group": "vehicle",
+      "dtype": "string",
+      "description": "车牌号 [组:vehicle, 类型:string]"
+    },
+    "批单类型": {
+      "en_name": "endorsement_type",
+      "group": "flag",
+      "dtype": "string",
+      "description": "批单类型 [组:flag, 类型:string]"
+    },
+    "承保保费": {
+      "en_name": "premium_yuan",
+      "group": "finance",
+      "dtype": "number",
+      "description": "承保保费 [组:finance, 类型:number]"
+    },
+    "签单保费": {
+      "en_name": "premium_signing_yuan",
+      "group": "finance",
+      "dtype": "number",
+      "description": "签单保费 [组:finance, 类型:number]"
+    }
+  },
+  "learn_history": [
+    {
+      "cn_field": "刷新时间",
+      "en_name": "time_refresh",
+      "learned_at": "2025-11-23T20:46:10.661338"
+    },
+    {
+      "cn_field": "投保确认时间",
+      "en_name": "time_confirm_insure",
+      "learned_at": "2025-11-23T20:46:10.661594"
+    },
+    {
+      "cn_field": "保险起期",
+      "en_name": "start_date",
+      "learned_at": "2025-11-23T20:46:10.661712"
+    },
+    {
+      "cn_field": "成都中支",
+      "en_name": "unmapped",
+      "learned_at": "2025-11-23T20:46:10.661813"
+    },
+    {
+      "cn_field": "保单号",
+      "en_name": "policy",
+      "learned_at": "2025-11-23T20:46:10.661906"
+    },
+    {
+      "cn_field": "续保单号",
+      "en_name": "policy",
+      "learned_at": "2025-11-23T20:46:10.661998"
+    },
+    {
+      "cn_field": "交叉销售标识",
+      "en_name": "flag_cross_sales",
+      "learned_at": "2025-11-23T20:46:10.662091"
+    },
+    {
+      "cn_field": "险种大类",
+      "en_name": "insurance_type",
+      "learned_at": "2025-11-23T20:46:10.662189"
+    },
+    {
+      "cn_field": "险种名称",
+      "en_name": "insurance_type",
+      "learned_at": "2025-11-23T20:46:10.662291"
+    },
+    {
+      "cn_field": "是否续保",
+      "en_name": "is_renewal",
+      "learned_at": "2025-11-23T20:46:10.662401"
+    },
+    {
+      "cn_field": "支公司",
+      "en_name": "branch",
+      "learned_at": "2025-11-23T20:46:10.662511"
+    },
+    {
+      "cn_field": "客户类别3",
+      "en_name": "customer",
+      "learned_at": "2025-11-23T20:46:10.662624"
+    },
+    {
+      "cn_field": "车辆类型[新]",
+      "en_name": "type",
+      "learned_at": "2025-11-23T20:46:10.662757"
+    },
+    {
+      "cn_field": "车险新业务分类",
+      "en_name": "unmapped",
+      "learned_at": "2025-11-23T20:46:10.662897"
+    },
+    {
+      "cn_field": "新旧车标志",
+      "en_name": "new_old_car",
+      "learned_at": "2025-11-23T20:46:10.663045"
+    },
+    {
+      "cn_field": "是否网约车",
+      "en_name": "online_hailing_is",
+      "learned_at": "2025-11-23T20:46:10.663293"
+    },
+    {
+      "cn_field": "是否异地车",
+      "en_name": "is_non_local",
+      "learned_at": "2025-11-23T20:46:10.663547"
+    },
+    {
+      "cn_field": "吨位分段",
+      "en_name": "tonnage_segment",
+      "learned_at": "2025-11-23T20:46:10.663721"
+    },
+    {
+      "cn_field": "精准评分等级",
+      "en_name": "level_score",
+      "learned_at": "2025-11-23T20:46:10.663905"
+    },
+    {
+      "cn_field": "车险分等级",
+      "en_name": "level",
+      "learned_at": "2025-11-23T20:46:10.664087"
+    },
+    {
+      "cn_field": "车险分分数",
+      "en_name": "unmapped",
+      "learned_at": "2025-11-23T20:46:10.664249"
+    },
+    {
+      "cn_field": "货车评分",
+      "en_name": "score_truck",
+      "learned_at": "2025-11-23T20:46:10.664425"
+    },
+    {
+      "cn_field": "货车种类",
+      "en_name": "truck_category",
+      "learned_at": "2025-11-23T20:46:10.664601"
+    },
+    {
+      "cn_field": "业务员",
+      "en_name": "agent",
+      "learned_at": "2025-11-23T20:46:10.664772"
+    },
+    {
+      "cn_field": "被保险人",
+      "en_name": "insured",
+      "learned_at": "2025-11-23T20:46:10.664946"
+    },
+    {
+      "cn_field": "被保险人年龄分组",
+      "en_name": "insured_age_group",
+      "learned_at": "2025-11-23T20:46:10.665254"
+    },
+    {
+      "cn_field": "被保险人证件号前六位",
+      "en_name": "insured_id_number",
+      "learned_at": "2025-11-23T20:46:10.665466"
+    },
+    {
+      "cn_field": "被保险人性别",
+      "en_name": "insured_gender",
+      "learned_at": "2025-11-23T20:46:10.665690"
+    },
+    {
+      "cn_field": "个代类型",
+      "en_name": "type",
+      "learned_at": "2025-11-23T20:46:10.665914"
+    },
+    {
+      "cn_field": "厂牌车型名称",
+      "en_name": "vehicle_model",
+      "learned_at": "2025-11-23T20:46:10.666122"
+    },
+    {
+      "cn_field": "车牌号码",
+      "en_name": "license_plate",
+      "learned_at": "2025-11-23T20:46:10.666323"
+    },
+    {
+      "cn_field": "发动机号码",
+      "en_name": "engine_number",
+      "learned_at": "2025-11-23T20:46:10.666527"
+    },
+    {
+      "cn_field": "车架号",
+      "en_name": "vin",
+      "learned_at": "2025-11-23T20:46:10.666753"
+    },
+    {
+      "cn_field": "行驶证车主",
+      "en_name": "unmapped",
+      "learned_at": "2025-11-23T20:46:10.666993"
+    },
+    {
+      "cn_field": "车主证件号前六位",
+      "en_name": "id_number",
+      "learned_at": "2025-11-23T20:46:10.667245"
+    },
+    {
+      "cn_field": "代理人/经纪人",
+      "en_name": "agent_broker",
+      "learned_at": "2025-11-23T20:46:10.667499"
+    },
+    {
+      "cn_field": "精友车型名称",
+      "en_name": "vehicle_model",
+      "learned_at": "2025-11-23T20:46:10.667757"
+    },
+    {
+      "cn_field": "客户源",
+      "en_name": "customer",
+      "learned_at": "2025-11-23T20:46:10.667993"
+    },
+    {
+      "cn_field": "批单号",
+      "en_name": "endorsement",
+      "learned_at": "2025-11-23T20:46:10.668230"
+    },
+    {
+      "cn_field": "批改类型",
+      "en_name": "type_endorsement",
+      "learned_at": "2025-11-23T20:46:10.668482"
+    },
+    {
+      "cn_field": "单套-险别",
+      "en_name": "unmapped",
+      "learned_at": "2025-11-23T20:46:10.668775"
+    },
+    {
+      "cn_field": "所属性质",
+      "en_name": "nature",
+      "learned_at": "2025-11-23T20:46:10.669202"
+    },
+    {
+      "cn_field": "投保人",
+      "en_name": "applicant",
+      "learned_at": "2025-11-23T20:46:10.669618"
+    },
+    {
+      "cn_field": "投保人证件号前六位",
+      "en_name": "applicant_id_number",
+      "learned_at": "2025-11-23T20:46:10.669961"
+    },
+    {
+      "cn_field": "业务来源",
+      "en_name": "source",
+      "learned_at": "2025-11-23T20:46:10.670390"
+    },
+    {
+      "cn_field": "整备质量",
+      "en_name": "curb_weight",
+      "learned_at": "2025-11-23T20:46:10.670725"
+    },
+    {
+      "cn_field": "新车购置价",
+      "en_name": "purchase_price_yuan",
+      "learned_at": "2025-11-23T20:46:10.671054"
+    },
+    {
+      "cn_field": "保单笔数",
+      "en_name": "policy_count",
+      "learned_at": "2025-11-23T20:46:10.671379"
+    },
+    {
+      "cn_field": "车辆使用年限",
+      "en_name": "service_years",
+      "learned_at": "2025-11-23T20:46:10.671703"
+    },
+    {
+      "cn_field": "吨位数",
+      "en_name": "tonnage",
+      "learned_at": "2025-11-23T20:46:10.672004"
+    },
+    {
+      "cn_field": "建议总折扣",
+      "en_name": "discount_coefficient",
+      "learned_at": "2025-11-23T20:46:10.672299"
+    },
+    {
+      "cn_field": "申请总折扣",
+      "en_name": "discount_coefficient",
+      "learned_at": "2025-11-23T20:46:10.672602"
+    },
+    {
+      "cn_field": "排量",
+      "en_name": "displacement",
+      "learned_at": "2025-11-23T20:46:10.672907"
+    },
+    {
+      "cn_field": "签单/批改保额",
+      "en_name": "signing_endorsement_insured_amount",
+      "learned_at": "2025-11-23T20:46:10.673222"
+    },
+    {
+      "cn_field": "签单/批改保费",
+      "en_name": "premium_signing_endorsement_yuan",
+      "learned_at": "2025-11-23T20:46:10.673588"
+    },
+    {
+      "cn_field": "签单数量",
+      "en_name": "signing_quantity",
+      "learned_at": "2025-11-23T20:46:10.673937"
+    },
+    {
+      "cn_field": "商车自主定价系数",
+      "en_name": "coefficient_coefficient",
+      "learned_at": "2025-11-23T20:46:10.674264"
+    },
+    {
+      "cn_field": "手续费",
+      "en_name": "commission_yuan",
+      "learned_at": "2025-11-23T20:46:10.674591"
+    },
+    {
+      "cn_field": "手续费比例",
+      "en_name": "commission_ratio_yuan_percent",
+      "learned_at": "2025-11-23T20:46:10.674937"
+    },
+    {
+      "cn_field": "手续费含税",
+      "en_name": "commission_tax_included_yuan",
+      "learned_at": "2025-11-23T20:46:10.675281"
+    },
+    {
+      "cn_field": "无赔款优待系数",
+      "en_name": "coefficient_discount_yuan_coefficient",
+      "learned_at": "2025-11-23T20:46:10.675640"
+    },
+    {
+      "cn_field": "增值税",
+      "en_name": "vat_yuan",
+      "learned_at": "2025-11-23T20:46:10.676033"
+    },
+    {
+      "cn_field": "座位数",
+      "en_name": "seats",
+      "learned_at": "2025-11-23T20:46:10.676402"
+    },
+    {
+      "cn_field": "所属机构",
+      "en_name": "organization",
+      "learned_at": "2025-11-23T20:46:10.676893"
+    },
+    {
+      "cn_field": "车辆种类",
+      "en_name": "category",
+      "learned_at": "2025-11-23T20:46:10.677354"
+    },
+    {
+      "cn_field": "客户名称",
+      "en_name": "customer",
+      "learned_at": "2025-11-23T20:46:10.677813"
+    },
+    {
+      "cn_field": "车牌号",
+      "en_name": "license_plate",
+      "learned_at": "2025-11-23T20:46:10.678244"
+    },
+    {
+      "cn_field": "批单类型",
+      "en_name": "endorsement_type",
+      "learned_at": "2025-11-23T20:46:10.678630"
+    },
+    {
+      "cn_field": "承保保费",
+      "en_name": "premium_yuan",
+      "learned_at": "2025-11-23T20:46:10.679065"
+    },
+    {
+      "cn_field": "签单保费",
+      "en_name": "premium_signing_yuan",
+      "learned_at": "2025-11-23T20:46:10.679489"
+    }
+  ]
+}
