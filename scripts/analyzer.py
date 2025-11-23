@@ -141,7 +141,8 @@ class ExcelAnalyzer:
 
     def __init__(self, skill_dir: Optional[Path] = None):
         if skill_dir is None:
-            skill_dir = Path(__file__).parent
+            # Scripts are now in scripts/ subdirectory, so parent.parent is the skill root
+            skill_dir = Path(__file__).parent.parent
 
         self.mapping_manager = FieldMappingManager(skill_dir)
         self.phrase_to_token = self.mapping_manager.get_phrase_to_token_dict()
