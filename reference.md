@@ -1,92 +1,87 @@
-# Excel Field Analyzer - Technical Reference
+# Excel 字段分析器 - 技术参考
 
-## Table of Contents
+## 目录
 
-- [Complete Feature Description](#complete-feature-description)
-- [Workflow Details](#workflow-details)
-- [Pre-built Field Mappings](#pre-built-field-mappings)
-- [AI Batch Learning](#ai-batch-learning)
-- [Mapping Quality Validation](#mapping-quality-validation)
-- [Configuration System](#configuration-system)
-- [Business Groups](#business-groups)
-- [Data Types](#data-types)
-- [Output Files](#output-files)
-- [Technical Architecture](#technical-architecture)
-- [FAQ](#faq)
-- [Dependencies](#dependencies)
-- [Version History](#version-history)
+- [完整功能说明](#完整功能说明)
+- [工作流详情](#工作流详情)
+- [预置字段映射](#预置字段映射)
+- [AI 批量学习](#ai-批量学习)
+- [映射质量校验](#映射质量校验)
+- [配置系统](#配置系统)
+- [业务分组](#业务分组)
+- [数据类型](#数据类型)
+- [输出文件](#输出文件)
+- [技术架构](#技术架构)
+- [常见问题](#常见问题)
+- [依赖](#依赖)
+- [版本历史](#版本历史)
 
 ---
 
-## Complete Feature Description
+## 完整功能说明
 
-### 1. Pre-built Auto Insurance Domain Mappings
+### 1. 预置车险领域映射
 
-Built-in 50+ auto insurance field mappings:
+内置 50+ 个车险领域字段映射：
 
-**Financial Fields**
-- Premium: Commercial premium, signing premium, amendment premium, refund premium, NCD base premium
-- Claims: Total claims, average claim, claim frequency, case count
-- Fees: Total fees, fee amount, fee rate, variable cost rate
+**财务类字段**
+- 保费：商业险保费、签单保费、批改保费、退保保费、NCD 基准保费
+- 赔款：总赔款、案均赔款、出险频度、案件数
+- 费用：总费用、费用金额、费用率、变动成本率
 
-**Vehicle Fields**
-- New/used vehicles, transferred vehicles, new energy vehicles
-- Vehicle insurance tier, license plate attribution
-- Heavy truck score, light truck score, highway risk level
+**车辆类字段**
+- 新旧车、过户车、新能源车
+- 车险分等级、车牌归属
+- 大货车评分、小货车评分、高速风险等级
 
-**Organization Fields**
-- Level 3 organization, Level 4 organization
+**机构类字段**
+- 三级机构、四级机构
 
-**Product Fields**
-- Insurance class, insurance type, Compulsory/Commercial insurance
+**产品类字段**
+- 险类、险种、交强/商业
 
-**Time Fields**
-- Confirmation time, policy confirmation time, refresh time, policy start date
+**时间类字段**
+- 确认时间、投保确认时间、刷新时间、保险起期
 
-**Other Fields**
-- Business type, customer category, renewal status, terminal source
+**其它字段**
+- 业务类型、客户类别、续保状态、终端来源
 
-### 2. Multi-Source Configuration System
+### 2. 多源配置系统
 
-- `auto_insurance.json` - Pre-built auto insurance mappings (50+ fields)
-- `custom.json` - User-defined mappings (auto-saved from interactive learning)
-- Excel configuration import (future feature)
+- `auto_insurance.json` - 预置车险映射（50+ 字段）
+- `custom.json` - 用户自定义映射（交互学习自动保存）
+- Excel 配置导入（后续功能）
 
-**Configuration Priority:**
-Complete match > Phrase combination > AI batch learning > Unknown
+**配置优先级：**
+完整匹配 > 词组组合 > AI 批量学习 > 未识别
+后加载的 JSON 会覆盖先加载的 JSON。
 
-Later-loaded JSON files override earlier ones.
+### 3. 智能字段识别
 
-### 3. Intelligent Field Recognition
-
-**Matching Strategy:**
-1. **Exact Match** - Highest priority
+**匹配策略：**
+1. **精确匹配** - 最高优先级
    - `商业险保费` → `commercial_premium`
-
-2. **Phrase Combination** - Keyword-based matching
+2. **词组组合** - 基于关键词的组合匹配
    - `总费用金额` → `total_fee_amount`
-
-3. **Auto Type Inference** - Based on data samples
-   - Numeric fields → `number`
-   - Date fields → `datetime`
-   - Text fields → `string`
-
-4. **Business Group Classification** - Domain categorization
+3. **自动类型推断** - 基于数据样本
+   - 数值型 → `number`
+   - 日期型 → `datetime`
+   - 文本型 → `string`
+4. **业务分组归类** - 按领域分类
    - finance, vehicle, time, organization, product, flag, partner, general
 
-### 4. AI Batch Learning (v2.2+)
+### 4. AI 批量学习（v2.2+）
 
-**Zero Manual Labor for Unknown Fields**
+**未知字段零人工处理**
 
-When encountering unknown fields, AI automatically:
+遇到未知字段时，AI 自动：
+1. 分析字段名语义与关键词
+2. 检查字段数据样本以推断类型
+3. 基于车险业务规则生成映射
+4. 批量保存到 `custom.json`
+5. 后续分析自动识别
 
-1. Analyzes field name semantics and keywords
-2. Examines field data samples to infer type
-3. Generates mappings based on auto insurance business rules
-4. Batch saves to `custom.json`
-5. Auto-recognizes in future analyses
-
-**Example Output:**
+**示例输出：**
 ```
 🔍 Found 70 unknown fields
 💡 Using AI to generate field mappings...
@@ -99,63 +94,63 @@ Results:
 - 签单保费 → premium_signing [finance/number]
 ```
 
-**AI Learning Process:**
+**AI 学习流程：**
 
-**Semantic Analysis:**
-- Keyword pattern matching (time/organization/finance/vehicle/product)
-- Chinese word segmentation and pinyin conversion
-- Business rule application
+**语义分析：**
+- 关键词模式匹配（时间/机构/财务/车辆/产品）
+- 中文分词与拼音转换
+- 业务规则应用
 
-**Data Sample Analysis:**
-- Extracts first 100 data rows
-- Auto-infers numeric/text/date types
-- Detects special formats (policy numbers, license plates, ID numbers)
+**数据样本分析：**
+- 抽取前 100 行数据
+- 自动推断数值/文本/日期类型
+- 识别特殊格式（保单号、车牌、证件号码）
 
-**Batch Mapping Generation:**
-- English field names (e.g., `签单保费` → `premium_signing`)
-- Business groups (e.g., finance/vehicle/time)
-- Data types (number/string/datetime)
+**批量生成映射：**
+- 英文字段名（如 `签单保费` → `premium_signing`）
+- 业务分组（如 finance/vehicle/time）
+- 数据类型（number/string/datetime）
 
-**Auto-Save:**
-Batch writes to `custom.json`, effective immediately
+**自动保存：**
+批量写入 `custom.json`，即时生效
 
-**Accuracy:**
-Based on auto insurance business testing: 70 unknown fields, 100% mapping accuracy
+**准确率：**
+车险业务测试：70 个未知字段，映射准确率 100%
 
-### 5. Mapping Quality Validation (v2.3+)
+### 5. 映射质量校验（v2.3+）
 
-**Automatic Translation Quality Assurance**
+**自动化翻译质量保障**
 
-After each mapping generation, automatic multi-dimensional quality checks:
+每次生成映射后进行自动多维质量检查：
 
-**Validation Dimensions:**
+**校验维度：**
 
-1. **Naming Convention Check**
-   - snake_case format validation
-   - Reasonable length (≤50 characters)
-   - Avoid generic placeholders (e.g., field, unknown_field)
+1. **命名规范检查**
+   - 验证 snake_case 格式
+   - 合理长度（≤50 字符）
+   - 避免通用占位符（如 field、unknown_field）
 
-2. **Group Consistency Check**
-   - Verify English names contain group-related domain terms
-   - e.g., finance group should contain premium/fee/amount
+2. **分组一致性检查**
+   - 校验英文字段名包含与分组相关的领域术语
+   - 例如 finance 组应包含 premium/fee/amount
 
-3. **Semantic Accuracy Check**
-   - Keyword mapping verification (e.g., "保费" → premium)
-   - Chinese character leak detection
-   - Simplification level assessment
+3. **语义准确性检查**
+   - 关键词映射验证（如“保费” → premium）
+   - 中文字符泄露检测
+   - 简化程度评估
 
-4. **Type Consistency Check**
-   - Time fields → datetime type
-   - Amount fields → number type
-   - "Yes/No" fields → string type
+4. **类型一致性检查**
+   - 时间类字段 → datetime 类型
+   - 金额类字段 → number 类型
+   - 是/否类字段 → string 类型
 
-**Quality Scoring:**
-- Excellent (≥90): Perfect mapping, no improvement needed
-- Good (75-89): Basically accurate, optimization optional
-- Fair (60-74): Manual review recommended
-- Poor (<60): Requires remapping
+**质量评分：**
+- 优秀（≥90）：映射完美，无需改进
+- 良好（75-89）：基本准确，可选优化
+- 一般（60-74）：建议人工复审
+- 较差（<60）：需重新映射
 
-**Output Report Format:**
+**输出报告格式：**
 ```markdown
 📊 Overall Statistics:
 - Total fields: 76
@@ -167,78 +162,77 @@ After each mapping generation, automatic multi-dimensional quality checks:
 📈 Quality Distribution Visualization
 ```
 
-### 6. Interactive Learning (Manual Mode)
+### 6. 交互式学习（手动模式）
 
-For precise control, manual mapping addition:
-
-1. Pause analysis, ask user
-2. User provides English field name and group
-3. Save to `custom.json`
-4. Auto-recognize in future
-
----
-
-## Workflow Details
-
-### Standard Analysis Flow
-
-**1. Load Excel File**
-- Read all worksheets
-- Auto-identify numeric/time columns
-- Data cleaning (trim spaces, type conversion)
-
-**2. Field Statistics**
-- Row count, null count, null rate
-- Unique value count
-- Top value distribution (top N items)
-- Numeric statistics (min/max/mean/sum)
-
-**3. Field Mapping**
-- Query mapping library (exact match)
-- Phrase combination matching
-- Generate English field names
-- Ensure unique field names (auto-add suffix)
-
-**4. AI Batch Learning** (Automated)
-- Detect unmapped fields
-- **Semantic Analysis:**
-  - Keyword pattern matching
-  - Chinese word segmentation & pinyin conversion
-  - Business rule application
-- **Data Sample Analysis:**
-  - Extract first 100 data rows
-  - Auto-infer numeric/text/date types
-  - Detect special formats
-- **Batch Generate Mappings:**
-  - English field names
-  - Business groups
-  - Data types
-- **Auto-Save:** Batch write to `custom.json`
-- **Immediate Effect:** Regenerate field mappings, 0 unknown fields
-
-**5. Unknown Field Handling** (Manual Mode, Optional)
-- Detect unmapped fields
-- Ask user:
-  - English field name?
-  - Business group?
-  - Data type?
-- Save to `custom.json`
-
-**6. Generate Reports**
-- HTML visualization report
-- JSON field mapping table
-- Statistical summary
-- Quality validation report
+用于精确控制，支持手动新增映射：
+1. 暂停分析，询问用户
+2. 用户提供英文字段名与分组
+3. 保存到 `custom.json`
+4. 后续自动识别
 
 ---
 
-## Pre-built Field Mappings
+## 工作流详情
 
-### Auto Insurance Domain (50+ Fields)
+### 标准分析流程
 
-**Financial Group**
-| Chinese | English | Type |
-|---------|---------|------|
+**1. 加载 Excel 文件**
+- 读取所有工作表
+- 自动识别数值/时间列
+- 数据清洗（去空格、类型转换）
+
+**2. 字段统计**
+- 行数、空值数、空值率
+- 唯一值数量
+- Top 值分布（前 N 项）
+- 数值统计（最小/最大/均值/合计）
+
+**3. 字段映射**
+- 查询映射库（精确匹配）
+- 词组组合匹配
+- 生成英文字段名
+- 保证字段名唯一（自动添加后缀）
+
+**4. AI 批量学习**（自动化）
+- 检测未映射字段
+- **语义分析：**
+  - 关键词模式匹配
+  - 中文分词与拼音转换
+  - 业务规则应用
+- **数据样本分析：**
+  - 抽取前 100 行数据
+  - 自动推断数值/文本/日期类型
+  - 识别特殊格式
+- **批量生成映射：**
+  - 英文字段名
+  - 业务分组
+  - 数据类型
+- **自动保存：** 批量写入 `custom.json`
+- **即时生效：** 重新生成字段映射，未知字段为 0
+
+**5. 未知字段处理**（手动模式，可选）
+- 检测未映射字段
+- 询问用户：
+  - 英文字段名？
+  - 业务分组？
+  - 数据类型？
+- 保存到 `custom.json`
+
+**6. 生成报告**
+- HTML 可视化报告
+- JSON 字段映射表
+- 统计摘要
+- 质量校验报告
+
+---
+
+## 预置字段映射
+
+### 车险领域（50+ 字段）
+
+**财务组**
+| 中文 | 英文 | 类型 |
+|------|------|------|
 | 商业险保费 | commercial_premium | number |
 | 签单保费 | premium_signing | number |
 | 批改保费 | premium_amendment | number |
@@ -253,9 +247,9 @@ For precise control, manual mapping addition:
 | 费用率 | rate_fee | number |
 | 变动成本率 | rate_variable_cost | number |
 
-**Vehicle Group**
-| Chinese | English | Type |
-|---------|---------|------|
+**车辆组**
+| 中文 | 英文 | 类型 |
+|------|------|------|
 | 新旧车 | vehicle_new_used | string |
 | 是否过户车 | flag_vehicle_transfer | string |
 | 是否新能源车 | flag_vehicle_new_energy | string |
@@ -265,24 +259,24 @@ For precise control, manual mapping addition:
 | 小货车评分 | score_light_truck | number |
 | 高速风险等级 | risk_level_highway | string |
 
-**Organization Group**
-| Chinese | English | Type |
-|---------|---------|------|
+**机构组**
+| 中文 | 英文 | 类型 |
+|------|------|------|
 | 三级机构 | org_level_3 | string |
 | 四级机构 | org_level_4 | string |
 
-**Product Group**
-| Chinese | English | Type |
-|---------|---------|------|
+**产品组**
+| 中文 | 英文 | 类型 |
+|------|------|------|
 | 险类 | insurance_class | string |
 | 险种类 | insurance_type | string |
 | 交三/主全 | insurance_compulsory_commercial | string |
 | 商业险 | insurance_commercial | string |
 | 交强险 | insurance_compulsory | string |
 
-**Time Group**
-| Chinese | English | Type |
-|---------|---------|------|
+**时间组**
+| 中文 | 英文 | 类型 |
+|------|------|------|
 | 确认时间 | time_confirm | datetime |
 | 投保确认时间 | time_confirm_insure | datetime |
 | 刷新时间 | time_refresh | datetime |
@@ -290,65 +284,65 @@ For precise control, manual mapping addition:
 
 ---
 
-## AI Batch Learning
+## AI 批量学习
 
-### Keyword Pattern Library
+### 关键词模式库
 
-**Time Pattern**
-- Keywords: 时间, 日期, 年月, 起期, 到期, etc.
-- Group: `time`
-- Type: `datetime`
+**时间模式**
+- 关键词：时间、日期、年月、起期、到期 等
+- 分组：`time`
+- 类型：`datetime`
 
-**Organization Pattern**
-- Keywords: 机构, 分公司, 支公司, 部门, etc.
-- Group: `organization`
-- Type: `string`
+**机构模式**
+- 关键词：机构、分公司、支公司、部门 等
+- 分组：`organization`
+- 类型：`string`
 
-**Finance Pattern**
-- Keywords: 保费, 赔款, 费用, 金额, 收入, 成本, etc.
-- Group: `finance`
-- Type: `number`
+**财务模式**
+- 关键词：保费、赔款、费用、金额、收入、成本 等
+- 分组：`finance`
+- 类型：`number`
 
-**Vehicle Pattern**
-- Keywords: 车牌, 车型, 车辆, 车龄, etc.
-- Group: `vehicle`
-- Type: `string`
+**车辆模式**
+- 关键词：车牌、车型、车辆、车龄 等
+- 分组：`vehicle`
+- 类型：`string`
 
-**Product Pattern**
-- Keywords: 险种, 险类, 产品, 方案, etc.
-- Group: `product`
-- Type: `string`
+**产品模式**
+- 关键词：险种、险类、产品、方案 等
+- 分组：`product`
+- 类型：`string`
 
-**Flag Pattern**
-- Keywords: 是否, 标识, 标志, 状态, etc.
-- Group: `flag`
-- Type: `string`
+**标识模式**
+- 关键词：是否、标识、标志、状态 等
+- 分组：`flag`
+- 类型：`string`
 
-### Type Inference Rules
+### 类型推断规则
 
-**Number Type:**
-- All values are numeric
-- Contains decimal points
-- Contains negative numbers
-- Field name contains: 金额, 保费, 赔款, 评分, 数量, etc.
+**数值型：**
+- 全部为数值
+- 包含小数点
+- 包含负数
+- 字段名包含：金额、保费、赔款、评分、数量 等
 
-**DateTime Type:**
-- Contains date patterns (YYYY-MM-DD, YYYY/MM/DD)
-- Contains time patterns (HH:MM:SS)
-- Field name contains: 时间, 日期, 起期, 到期, etc.
+**日期时间型：**
+- 包含日期模式（YYYY-MM-DD、YYYY/MM/DD）
+- 包含时间模式（HH:MM:SS）
+- 字段名包含：时间、日期、起期、到期 等
 
-**String Type:**
-- Default fallback
-- Mixed content types
-- Text-based fields
+**字符串型：**
+- 默认兜底
+- 内容类型混合
+- 文本类字段
 
-### Custom Domain Extension
+### 自定义领域扩展
 
-To add new business domains:
+若需新增业务领域：
 
-**Method 1: Create New JSON File**
+**方法一：新增 JSON 文件**
 
-Create `field_mappings/logistics.json`:
+创建 `field_mappings/logistics.json`：
 
 ```json
 {
@@ -370,9 +364,9 @@ Create `field_mappings/logistics.json`:
 }
 ```
 
-**Method 2: Extend AI Mapper**
+**方法二：扩展 AI 映射器**
 
-Edit `ai_mapper.py`, add keywords to `keyword_patterns`:
+编辑 `ai_mapper.py`，在 `keyword_patterns` 中新增关键词：
 
 ```python
 self.keyword_patterns = {
@@ -387,32 +381,32 @@ self.keyword_patterns = {
 
 ---
 
-## Mapping Quality Validation
+## 映射质量校验
 
-### Validation Rules
+### 校验规则
 
-**1. Naming Convention (20 points)**
-- Valid snake_case format: 10 points
-- Reasonable length (≤50 chars): 5 points
-- No generic placeholders: 5 points
+**1. 命名规范（20 分）**
+- 合法 snake_case：10 分
+- 合理长度（≤50 字符）：5 分
+- 无通用占位符：5 分
 
-**2. Group Consistency (30 points)**
-- Finance group contains: premium, fee, amount, cost, revenue
-- Vehicle group contains: vehicle, car, license, plate
-- Time group contains: time, date, datetime, period
-- Organization group contains: org, organization, dept, branch
+**2. 分组一致性（30 分）**
+- 财务组包含：premium、fee、amount、cost、revenue
+- 车辆组包含：vehicle、car、license、plate
+- 时间组包含：time、date、datetime、period
+- 机构组包含：org、organization、dept、branch
 
-**3. Semantic Accuracy (30 points)**
-- Keyword mapping verification
-- No Chinese character leakage
-- Appropriate simplification
+**3. 语义准确性（30 分）**
+- 关键词映射校验
+- 无中文字符泄露
+- 适度简化
 
-**4. Type Consistency (20 points)**
-- Time fields → datetime type
-- Amount/fee/premium fields → number type
-- Flag/status fields → string type
+**4. 类型一致性（20 分）**
+- 时间类 → datetime 类型
+- 金额/费用/保费类 → number 类型
+- 标识/状态类 → string 类型
 
-### Quality Report Format
+### 质量报告格式
 
 ```markdown
 # Field Mapping Quality Validation Report
@@ -457,21 +451,21 @@ self.keyword_patterns = {
 
 ---
 
-## Configuration System
+## 配置系统
 
-### Configuration Files
+### 配置文件
 
-**1. Auto Insurance Mappings**
-- File: `field_mappings/auto_insurance.json`
-- Contents: 50+ pre-built mappings
-- Read-only (should not be modified)
+**1. 车险映射**
+- 文件：`field_mappings/auto_insurance.json`
+- 内容：50+ 预置映射
+- 只读（不建议修改）
 
-**2. Custom Mappings**
-- File: `field_mappings/custom.json`
-- Contents: User-defined + AI-learned mappings
-- Writable (auto-updated by system)
+**2. 自定义映射**
+- 文件：`field_mappings/custom.json`
+- 内容：用户自定义 + AI 学习映射
+- 可写（系统自动更新）
 
-### Configuration Format
+### 配置格式
 
 ```json
 {
@@ -487,63 +481,63 @@ self.keyword_patterns = {
 }
 ```
 
-### Mapping Priority
+### 映射优先级
 
-1. **Exact Match** (highest priority)
-2. **Phrase Combination Match**
-3. **AI Generated Mapping**
-4. **Unknown** (requires learning)
+1. **精确匹配**（最高优先级）
+2. **词组组合匹配**
+3. **AI 生成映射**
+4. **未知**（需学习）
 
-Later-loaded files override earlier ones.
-
----
-
-## Business Groups
-
-| Group | Description | Example Fields |
-|-------|-------------|----------------|
-| finance | Financial data | Premium, claims, fees, costs |
-| organization | Organization info | Level 3 org, Level 4 org, branches |
-| vehicle | Vehicle-related | New/used vehicles, license plates |
-| product | Product info | Insurance class, insurance type |
-| time | Date/time | Confirmation time, policy start date |
-| flag | Flag/status fields | Renewal flag, new energy flag |
-| partner | Partner info | 4S groups, dealers |
-| general | General fields | Business type, customer category |
+后加载文件覆盖先加载文件。
 
 ---
 
-## Data Types
+## 业务分组
 
-| Type | Role | Default Aggregation | Examples |
-|------|------|---------------------|----------|
-| number | measure | sum | Premium, claims, scores |
-| datetime | dimension | none | Confirmation time, start date |
-| string | dimension | none | Insurance class, customer category |
-
-**Role Definitions:**
-- **measure**: Quantitative data, can be aggregated (sum, avg, etc.)
-- **dimension**: Categorical data, used for grouping and filtering
+| 分组 | 描述 | 示例字段 |
+|------|------|-----------|
+| finance | 财务数据 | 保费、赔款、费用、成本 |
+| organization | 机构信息 | 三级机构、四级机构、分支 |
+| vehicle | 车辆相关 | 新旧车、车牌 |
+| product | 产品信息 | 险类、险种 |
+| time | 日期/时间 | 确认时间、起保日期 |
+| flag | 标识/状态 | 续保标识、新能源标识 |
+| partner | 合作方信息 | 4S 集团、经销商 |
+| general | 通用字段 | 业务类型、客户类别 |
 
 ---
 
-## Output Files
+## 数据类型
 
-### 1. HTML Visualization Report
+| 类型 | 角色 | 默认聚合 | 示例 |
+|------|------|----------|------|
+| number | 度量 | sum | 保费、赔款、评分 |
+| datetime | 维度 | none | 确认时间、起保日期 |
+| string | 维度 | none | 险类、客户类别 |
 
-**Filename:** `{original_filename}_{timestamp}_分析报告.html`
+**角色定义：**
+- **measure**：定量数据，可聚合（sum、avg 等）
+- **dimension**：分类数据，用于分组与筛选
 
-**Contents:**
-- File metadata
-- Field statistics table for each worksheet
-- Numeric statistics, top value distribution
-- Interactive exploration capability
+---
 
-### 2. JSON Field Mapping Table
+## 输出文件
 
-**Filename:** `{original_filename}_{timestamp}_字段映射.json`
+### 1. HTML 可视化报告
 
-**Format:**
+**文件名：**`{original_filename}_{timestamp}_分析报告.html`
+
+**内容：**
+- 文件元信息
+- 各工作表字段统计表
+- 数值统计、Top 值分布
+- 交互式探索能力
+
+### 2. JSON 字段映射表
+
+**文件名：**`{original_filename}_{timestamp}_字段映射.json`
+
+**格式：**
 ```json
 [
   {
@@ -561,104 +555,104 @@ Later-loaded files override earlier ones.
 ]
 ```
 
-### 3. Quality Validation Report
+### 3. 质量校验报告
 
-**Filename:** `{original_filename}_{timestamp}_质量检查报告.md`
+**文件名：**`{original_filename}_{timestamp}_质量检查报告.md`
 
-**Format:** Markdown
+**格式：** Markdown
 
-**Contents:**
-- Overall statistics: Average score, quality grade distribution
-- Mappings requiring review: Low-score fields with issue diagnosis
-- Excellent mapping examples: High-quality mapping references
-- Quality distribution chart: Visual quality distribution
+**内容：**
+- 总体统计：平均得分、质量等级分布
+- 需复审映射：低分字段的问题诊断
+- 优秀映射示例：高质量参考
+- 质量分布图：可视化分布
 
 ---
 
-## Technical Architecture
+## 技术架构
 
 ```
 excel-field-analyzer/
-├── SKILL.md                    # Skill definition (main documentation)
-├── reference.md                # Technical reference (this file)
-├── examples.md                 # Usage examples
-├── scripts/                    # Python scripts
-│   ├── analyzer.py             # Core analysis engine
-│   ├── ai_mapper.py            # AI batch field mapping generator
-│   ├── mapping_validator.py   # Mapping quality validator
-│   └── interactive_analyzer.py # Interactive CLI wrapper
-├── field_mappings/             # Field mapping library
-│   ├── auto_insurance.json     # Auto insurance pre-built mappings (50+ fields)
-│   └── custom.json             # AI-learned + user-defined mappings
-└── templates/                  # HTML templates (future)
+├── SKILL.md                    # 技能定义（主文档）
+├── reference.md                # 技术参考（本文档）
+├── examples.md                 # 使用示例
+├── scripts/                    # Python 脚本
+│   ├── analyzer.py             # 核心分析引擎
+│   ├── ai_mapper.py            # AI 批量字段映射生成器
+│   ├── mapping_validator.py    # 映射质量校验器
+│   └── interactive_analyzer.py # 交互式命令行封装
+├── field_mappings/             # 字段映射库
+│   ├── auto_insurance.json     # 车险预置映射（50+ 字段）
+│   └── custom.json             # AI 学习 + 用户自定义映射
+└── templates/                  # HTML 模板（后续）
 
-Core Modules:
-- analyzer.py: Excel/CSV reading, field analysis, HTML report generation, quality validation integration
-- ai_mapper.py: Semantic analysis, data sample inference, batch mapping generation
-- mapping_validator.py: Multi-dimensional quality checks, scoring system, report generation
-- FieldMappingManager: Multi-source config management, mapping queries
-- AIFieldMapper: Keyword matching, pinyin conversion, type inference
-- MappingValidator: Naming convention checks, semantic validation, quality scoring
+核心模块：
+- analyzer.py：读取 Excel/CSV、字段分析、HTML 报告生成、质量校验集成
+- ai_mapper.py：语义分析、数据样本推断、批量映射生成
+- mapping_validator.py：多维质量检查、评分体系、报告生成
+- FieldMappingManager：多源配置管理、映射查询
+- AIFieldMapper：关键词匹配、拼音转换、类型推断
+- MappingValidator：命名规范检查、语义校验、质量评分
 ```
 
 ---
 
-## FAQ
+## 常见问题
 
-**Q: How accurate is AI batch learning?**
-A: Based on auto insurance business testing, 70 unknown fields achieved 100% mapping accuracy. Supports time/organization/finance/product/vehicle/flag and other common groups, with accurate data type inference.
+**问：AI 批量学习的准确率如何？**
+答：车险业务测试中，70 个未知字段达到 100% 映射准确率。覆盖时间/机构/财务/产品/车辆/标识等常见分组，并能准确推断数据类型。
 
-**Q: Will AI batch learning overwrite my custom mappings?**
-A: No. AI only processes unknown fields; already-mapped fields remain unchanged. All learning results are saved to `custom.json` and can be edited or deleted anytime.
+**问：AI 批量学习会覆盖我的自定义映射吗？**
+答：不会。AI 仅处理未知字段，已映射字段保持不变。全部学习结果保存到 `custom.json`，可随时编辑或删除。
 
-**Q: Can I disable AI batch learning?**
-A: Yes. Delete or rename the `ai_mapper.py` file to disable it. The system will prompt "AI mapper unavailable" and skip batch learning.
+**问：可以关闭 AI 批量学习吗？**
+答：可以。删除或重命名 `ai_mapper.py` 即可禁用，系统会提示 “AI mapper unavailable” 并跳过批量学习。
 
-**Q: What are the English field name generation rules?**
-A: Based on Chinese keyword mapping (e.g., "保费" → premium, "车牌" → license_plate), multiple keywords connected with underscores. If no match, generates generic name with numeric suffix to ensure uniqueness.
+**问：英文字段名的生成规则是什么？**
+答：基于中文关键词映射（如“保费”→ premium，“车牌”→ license_plate），多个关键词以下划线连接。若无匹配，将生成带数字后缀的通用名称以确保唯一性。
 
-**Q: How do I add new business domain mappings?**
-A: Create a new JSON file in `field_mappings/` (e.g., `logistics.json`), following the `auto_insurance.json` format. Or add business keywords to `keyword_patterns` in `ai_mapper.py`.
+**问：如何新增业务领域映射？**
+答：在 `field_mappings/` 新建 JSON 文件（如 `logistics.json`），遵循 `auto_insurance.json` 格式；或在 `ai_mapper.py` 的 `keyword_patterns` 中补充业务关键词。
 
-**Q: What is the mapping priority?**
-A: Exact match > Phrase combination > AI batch learning > Unknown. Later-loaded JSON overrides earlier ones.
+**问：映射优先级是什么？**
+答：精确匹配 > 词组组合 > AI 批量学习 > 未知。后加载的 JSON 覆盖先加载的 JSON。
 
-**Q: How do I reset custom mappings?**
-A: Delete or clear the `mappings` section in `field_mappings/custom.json`.
+**问：如何重置自定义映射？**
+答：删除或清空 `field_mappings/custom.json` 中的 `mappings` 区域。
 
-**Q: Does it support multiple worksheets?**
-A: Supports reading all worksheets, but field mapping is only generated for the first worksheet.
+**问：是否支持多工作表？**
+答：支持读取所有工作表，但字段映射仅针对第一个工作表生成。
 
-**Q: How do I export the mapping library?**
-A: Directly copy `field_mappings/*.json` files to another environment.
+**问：如何导出映射库？**
+答：直接复制 `field_mappings/*.json` 到目标环境即可。
 
-**Q: How do I customize the Top value count?**
-A: Use the `topn` parameter, e.g., `analyzer.py file.xlsx ./output 20`.
+**问：如何自定义 Top 值数量？**
+答：使用 `topn` 参数，例如：`analyzer.py file.xlsx ./output 20`。
 
-**Q: What file formats are supported?**
-A: `.xlsx`, `.xls`, `.csv`, `.txt`
+**问：支持哪些文件格式？**
+答：`.xlsx`、`.xls`、`.csv`、`.txt`
 
-**Q: How do I handle encoding issues with CSV files?**
-A: The analyzer auto-detects encoding (UTF-8, GBK, GB2312). If issues persist, convert to UTF-8 first.
+**问：CSV 文件的编码问题如何处理？**
+答：分析器会自动检测编码（UTF-8、GBK、GB2312）。如仍有问题，请先转换为 UTF-8。
 
 ---
 
-## Dependencies
+## 依赖
 
-### Required Python Packages
+### 必需的 Python 包
 
 - Python 3.7+
 - pandas (≥1.0.0)
 - openpyxl (≥3.0.0)
 - numpy (≥1.18.0)
 
-### Installation
+### 安装
 
 ```bash
 pip install pandas openpyxl numpy
 ```
 
-Or use requirements.txt:
+或使用 requirements.txt：
 
 ```bash
 pip install -r requirements.txt
@@ -666,44 +660,44 @@ pip install -r requirements.txt
 
 ---
 
-## Version History
+## 版本历史
 
-### v2.3 (2025-11-23) 🎯 Quality Assurance
-- 🔍 **Mapping Quality Validation** - Automatic translation accuracy verification!
-- ✨ New `mapping_validator.py` module - Multi-dimensional quality assessment system
-- ✨ 4 validation dimensions: Naming convention, group consistency, semantic accuracy, type consistency
-- ✨ Quality scoring system: Excellent/Good/Fair/Poor four-tier rating
-- 📊 Auto-generate quality reports - Markdown format with issue diagnosis and improvement suggestions
-- 🔄 Integrated into analysis flow - Auto quality check after each mapping generation
+### v2.3 (2025-11-23) 🎯 质量保障
+- 🔍 **映射质量校验** - 自动验证翻译准确性！
+- ✨ 新增 `mapping_validator.py` 模块 - 多维质量评估体系
+- ✨ 4 大校验维度：命名规范、分组一致、语义准确、类型一致
+- ✨ 质量评分体系：优秀/良好/一般/较差 四档评级
+- 📊 自动生成质量报告 - Markdown 格式，含问题诊断与改进建议
+- 🔄 集成到分析流程 - 每次生成映射后自动质量检查
 
-### v2.2 (2025-11-23) 🚀 AI Batch Learning
-- 🤖 **AI Batch Learning** - Auto-analyze unknown fields and generate mappings, zero manual labor!
-- ✨ New `ai_mapper.py` module - Intelligent field mapping based on semantics and data samples
-- ✨ Integrated auto insurance domain keyword library - Auto-recognize time/org/finance/product/vehicle/flag groups
-- ✨ Auto type inference - Analyze field data samples to intelligently determine number/string/datetime
-- 📊 Test results: Successfully batch-learned 70 unknown fields, 100% mapping accuracy
-- 💾 Auto-save learning results to `custom.json` - Reuse in future analyses
+### v2.2 (2025-11-23) 🚀 AI 批量学习
+- 🤖 **AI 批量学习** - 自动分析未知字段并生成映射，零人工！
+- ✨ 新增 `ai_mapper.py` 模块 - 基于语义与数据样本的智能映射
+- ✨ 集成车险领域关键词库 - 自动识别时间/机构/财务/产品/车辆/标识分组
+- ✨ 自动类型推断 - 分析字段数据样本，智能判定 number/string/datetime
+- 📊 测试结果：成功批量学习 70 个未知字段，准确率 100%
+- 💾 学习结果自动保存到 `custom.json` - 后续复用
 
 ### v2.1 (2025-11-23)
-- ✨ **CSV file support** - Auto-detect and process .csv and .txt files
-- ✨ Unified Excel and CSV analysis interface
-- 📝 Updated documentation for CSV support
-- 🔧 Optimized file type detection logic
+- ✨ **支持 CSV 文件** - 自动识别并处理 .csv 与 .txt
+- ✨ 统一 Excel 与 CSV 分析接口
+- 📝 更新 CSV 支持相关文档
+- 🔧 优化文件类型检测逻辑
 
 ### v2.0 (2025-11-23)
-- ✨ Refactored as Claude Code Skill
-- ✨ Multi-source configuration system (JSON + custom)
-- ✨ Interactive field learning
-- ✨ Enhanced field mapping management
-- ✨ Support for command/conversational invocation
+- ✨ 重构为 Claude Code Skill
+- ✨ 多源配置系统（JSON + 自定义）
+- ✨ 交互式字段学习
+- ✨ 增强字段映射管理
+- ✨ 支持命令/对话式调用
 
 ### v1.0
-- Basic Excel analysis functionality
-- HTML report generation
-- JSON field mapping export
+- 基础 Excel 分析功能
+- 生成 HTML 报告
+- 导出 JSON 字段映射
 
 ---
 
-## License
+## 许可证
 
-MIT License
+MIT 许可证

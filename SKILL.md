@@ -4,57 +4,57 @@ description: "分析Excel/CSV字段结构，AI自动生成中英文映射，验�
 allowed-tools: Read, Bash, Write, Glob, Grep
 ---
 
-# Excel/CSV Field Analyzer
+# Excel/CSV 字段分析器
 
-## Overview
+## 概述
 
-Intelligent analysis of Excel and CSV files with automatic generation of bilingual field mappings, statistical reports, and HTML visualizations.
+智能分析 Excel 与 CSV 文件，自动生成中英文字段映射、统计报告与 HTML 可视化。
 
-**Key Capabilities:**
-- Field statistics analysis (null rates, unique values, distribution)
-- AI-powered field mapping (50+ pre-built auto insurance fields)
-- Automatic mapping quality validation
-- HTML visualization reports
+**核心能力：**
+- 字段统计分析（空值率、唯一值、分布）
+- AI 字段映射（内置 50+ 车险领域字段）
+- 映射质量自动校验
+- HTML 可视化报告
 
-## Quick Start
+## 快速开始
 
-### Conversational Invocation (Recommended)
+### 对话式调用（推荐）
 
-Simply chat with Claude:
+直接与 Claude 对话：
 ```
-"Help me analyze this Excel file's fields"
-"Analyze ./data/insurance_data.xlsx field mappings"
+"帮我分析这个 Excel 文件的字段"
+"分析 ./data/insurance_data.xlsx 的字段映射"
 ```
 
-### Command Line
+### 命令行
 
 ```bash
-# Basic analysis
+# 基础分析
 python scripts/analyzer.py <file_path> [output_dir] [topn]
 
-# Example
+# 示例
 python scripts/analyzer.py data.xlsx ./output 10
 
-# Supported formats: .xlsx, .xls, .csv, .txt
+# 支持格式：.xlsx, .xls, .csv, .txt
 ```
 
-## Core Features
+## 核心特性
 
-### 1. Pre-built Mapping Library
-- **Auto Insurance Domain**: 50+ built-in field mappings
-- **Coverage**: Finance, Vehicle, Organization, Product, Time fields
-- **Examples**:
-  - `商业险保费` → `commercial_premium` (finance/number)
-  - `三级机构` → `org_level_3` (organization/string)
-  - `确认时间` → `time_confirm` (time/datetime)
+### 1. 预置映射库
+- **车险领域**：内置 50+ 字段映射
+- **覆盖范围**：财务、车辆、机构、产品、时间
+- **示例**：
+  - `商业险保费` → `commercial_premium`（finance/number）
+  - `三级机构` → `org_level_3`（organization/string）
+  - `确认时间` → `time_confirm`（time/datetime）
 
-### 2. AI Batch Learning
-- **Zero Manual Labor**: Automatically generates mappings for unknown fields
-- **Intelligent Analysis**: Semantic analysis + data sample inference
-- **Auto-Save**: Results saved to `custom.json` for future use
-- **High Accuracy**: 100% accuracy on 70-field test dataset
+### 2. AI 批量学习
+- **零人工**：自动为未知字段生成映射
+- **智能分析**：语义分析 + 数据样本推断
+- **自动保存**：结果保存至 `custom.json` 便于复用
+- **高准确率**：70 字段测试集准确率 100%
 
-**Example:**
+**示例：**
 ```
 🔍 Found 70 unknown fields
 💡 Using AI to generate mappings...
@@ -65,25 +65,25 @@ python scripts/analyzer.py data.xlsx ./output 10
 - 签单保费 → premium_signing [finance/number]
 ```
 
-### 3. Quality Validation
-- **Automatic Checks**: 4 validation dimensions (naming, grouping, semantics, type)
-- **Quality Scoring**: Excellent (≥90) / Good (75-89) / Fair (60-74) / Poor (<60)
-- **Detailed Reports**: Markdown format with improvement suggestions
+### 3. 质量校验
+- **自动检查**：4 个维度（命名、分组、语义、类型）
+- **质量评分**：优秀（≥90）/ 良好（75-89）/ 一般（60-74）/ 较差（<60）
+- **详细报告**：Markdown，附改进建议
 
-### 4. Interactive Learning
-- **Manual Mode**: Optional precise control for field mappings
-- **Guided Process**: Step-by-step field name, group, and type selection
-- **Persistent Storage**: All learned mappings saved to `custom.json`
+### 4. 交互式学习
+- **手动模式**：可选，精确控制字段映射
+- **引导流程**：逐步选择英文字段名、分组、类型
+- **持久存储**：全部学习映射保存至 `custom.json`
 
-## Output Files
+## 输出文件
 
-### 1. HTML Visualization Report
-- File metadata and generation time
-- Complete statistics table for each worksheet
-- Numeric statistics, top value distribution
-- Interactive exploration
+### 1. HTML 可视化报告
+- 文件元信息与生成时间
+- 每个工作表的完整统计表
+- 数值统计与 Top 值分布
+- 交互式探索
 
-### 2. JSON Field Mapping Table
+### 2. JSON 字段映射表
 ```json
 {
   "field_name": "commercial_premium",
@@ -96,57 +96,57 @@ python scripts/analyzer.py data.xlsx ./output 10
 }
 ```
 
-### 3. Quality Validation Report (Markdown)
-- Overall quality statistics
-- Fields requiring review with suggestions
-- Excellent mapping examples
-- Quality distribution visualization
+### 3. 质量校验报告（Markdown）
+- 总体质量统计
+- 需复审字段与建议
+- 优秀映射示例
+- 质量分布可视化
 
-## Business Groups
+## 业务分组
 
-| Group | Description | Examples |
-|-------|-------------|----------|
-| finance | Financial data | Premium, claims, fees |
-| organization | Organization info | Level 3 org, Level 4 org |
-| vehicle | Vehicle-related | License plates, vehicle type |
-| product | Product info | Insurance class, insurance type |
-| time | Date/time fields | Confirmation time, start date |
-| flag | Status flags | Renewal flag, new energy flag |
-| partner | Partner info | 4S groups, dealers |
-| general | General fields | Business type, customer category |
+| 分组 | 描述 | 示例 |
+|------|------|------|
+| finance | 财务数据 | 保费、赔款、费用 |
+| organization | 机构信息 | 三级机构、四级机构 |
+| vehicle | 车辆相关 | 车牌、车型 |
+| product | 产品信息 | 险类、险种 |
+| time | 时间字段 | 确认时间、起保日期 |
+| flag | 状态标识 | 续保标识、新能源标识 |
+| partner | 合作方信息 | 4S 集团、经销商 |
+| general | 通用字段 | 业务类型、客户类别 |
 
-## Documentation
+## 文档
 
-- **reference.md** - Complete technical documentation, configuration details, API reference
-- **examples.md** - Code examples, usage scenarios, integration guides
+- **reference.md** - 完整技术文档、配置细节、API 参考
+- **examples.md** - 代码示例、使用场景、集成指南
 
-## Version History
+## 版本历史
 
-### v2.3 (2025-11-23) - Quality Assurance
-- 🔍 Mapping quality validation system
-- 4 validation dimensions with quality scoring
-- Automatic quality report generation
+### v2.3 (2025-11-23) - 质量保障
+- 🔍 映射质量校验体系
+- 4 个校验维度与质量评分
+- 自动生成质量报告
 
-### v2.2 (2025-11-23) - AI Batch Learning
-- 🤖 AI-powered automatic field mapping
-- Semantic analysis + data sample inference
-- 100% accuracy on test dataset
+### v2.2 (2025-11-23) - AI 批量学习
+- 🤖 AI 驱动的自动字段映射
+- 语义分析 + 数据样本推断
+- 测试数据集准确率 100%
 
 ### v2.1 (2025-11-23)
-- ✨ CSV file support
-- Unified Excel and CSV interface
+- ✨ 支持 CSV 文件
+- 统一 Excel 与 CSV 接口
 
 ### v2.0 (2025-11-23)
-- ✨ Claude Code Skill architecture
-- Multi-source configuration system
-- Interactive field learning
+- ✨ Claude Code Skill 架构
+- 多源配置系统
+- 交互式字段学习
 
-## Dependencies
+## 依赖
 
 ```bash
 pip install pandas openpyxl numpy
 ```
 
-## License
+## 许可证
 
-MIT License
+MIT 许可证
