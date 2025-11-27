@@ -279,7 +279,185 @@ for sheet_name, sheet_data in result['stats'].items():
 
 ---
 
-## 7. 测试与校验
+## 7. 手机号码自动填充
+
+### 功能说明
+
+自动检测并填充 Excel/CSV 文件中的空手机号码字段，使用中国未启用的 **100 号段**（10000000000-10099999999）。
+
+### 基础用法
+
+```bash
+# 自动检测手机号字段并填充
+python scripts/phone_number_filler.py data.xlsx
+
+# 指定字段名
+python scripts/phone_number_filler.py data.xlsx --field "联系电话"
+
+# 预览模式（不实际修改文件）
+python scripts/phone_number_filler.py data.xlsx --preview
+```
+
+### 高级选项
+
+```bash
+# 指定输出文件路径
+python scripts/phone_number_filler.py data.xlsx --output filled_data.xlsx
+
+# 处理 Excel 特定工作表
+python scripts/phone_number_filler.py data.xlsx --sheet "客户信息"
+
+# 使用自定义号段前缀（必须是1字头的3位数）
+python scripts/phone_number_filler.py data.xlsx --prefix 101
+
+# 处理 CSV 文件
+python scripts/phone_number_filler.py data.csv
+
+# 查看帮助
+python scripts/phone_number_filler.py --help
+```
+
+### 使用示例
+
+**示例1：自动检测并填充**
+```bash
+$ python scripts/phone_number_filler.py customer_data.xlsx
+
+📱 使用号段: 100xxxxxxxx (中国未启用的100号段)
+📂 正在读取文件: customer_data.xlsx
+   格式: Excel, 行数: 1000, 列数: 15
+🔍 自动检测到手机号字段: 手机号码, 联系电话
+
+📊 字段 '手机号码' 统计:
+   总行数: 1000
+   空值数: 150
+   空值率: 15.00%
+✅ 成功填充 150 个手机号码
+
+📊 字段 '联系电话' 统计:
+   总行数: 1000
+   空值数: 0
+   空值率: 0.00%
+✅ 字段 '联系电话' 没有空值，无需填充
+
+💾 正在保存文件: customer_data_filled.xlsx
+✅ 文件已保存: customer_data_filled.xlsx
+
+============================================================
+✅ 成功填充 150 个手机号码
+📁 输出文件: customer_data_filled.xlsx
+```
+
+**示例2：预览模式**
+```bash
+$ python scripts/phone_number_filler.py data.xlsx --preview
+
+📱 使用号段: 100xxxxxxxx (中国未启用的100号段)
+📂 正在读取文件: data.xlsx
+🔍 自动检测到手机号字段: 手机
+
+📊 字段 '手机' 统计:
+   总行数: 500
+   空值数: 50
+   空值率: 10.00%
+🔍 预览模式: 将填充 50 个空值
+   行 2: [空] → 10012345678
+   行 5: [空] → 10087654321
+   行 8: [空] → 10056789012
+   行 12: [空] → 10098765432
+   行 15: [空] → 10011223344
+
+============================================================
+✅ 预览完成，将填充 50 个手机号码
+```
+
+**示例3：指定字段名**
+```bash
+$ python scripts/phone_number_filler.py data.xlsx --field "客户手机"
+
+📱 使用号段: 100xxxxxxxx (中国未启用的100号段)
+📂 正在读取文件: data.xlsx
+🎯 使用指定字段: 客户手机
+
+📊 字段 '客户手机' 统计:
+   总行数: 200
+   空值数: 25
+   空值率: 12.50%
+✅ 成功填充 25 个手机号码
+
+💾 正在保存文件: data_filled.xlsx
+✅ 文件已保存: data_filled.xlsx
+```
+
+### Python API 用法
+
+```python
+from pathlib import Path
+import sys
+sys.path.append(str(Path.home() / '.claude/skills/excel-field-analyzer/scripts'))
+from phone_number_filler import PhoneNumberFiller
+
+# 创建填充器（使用100号段）
+filler = PhoneNumberFiller(prefix='100')
+
+# 处理文件
+result = filler.process_file(
+    file_path='data.xlsx',
+    field='手机号码',           # 可选，不指定则自动检测
+    output_path='filled.xlsx',  # 可选，默认添加_filled后缀
+    preview=False               # False表示实际修改文件
+)
+
+# 检查结果
+if result['success']:
+    print(f"✅ {result['message']}")
+    print(f"填充数量: {result['filled_count']}")
+    print(f"输出文件: {result['output_path']}")
+else:
+    print(f"❌ {result['message']}")
+```
+
+### 字段自动检测规则
+
+脚本会自动检测包含以下关键词的字段：
+- 中文：手机、电话、联系方式、联系电话、移动电话
+- 英文：phone、mobile、tel、telephone、contact
+
+### 空值识别规则
+
+以下值会被视为空值并填充：
+- 空字符串 `""`
+- pandas 的 `NaN`、`None`
+- 字符串形式：`"nan"`、`"none"`、`"null"`、`"无"`、`"空"`、`"n/a"`、`"na"`
+
+### 注意事项
+
+1. **号段安全性**：默认使用 100 号段，这是中国从未分配给任何运营商的号段，不会与真实手机号冲突
+2. **数据备份**：脚本默认创建新文件（添加 `_filled` 后缀），不会覆盖原文件
+3. **预览模式**：使用 `--preview` 参数可以先查看将要填充的内容，确认无误后再实际执行
+4. **批量处理**：可以使用 Python 脚本批量处理多个文件
+
+### 批量处理示例
+
+```python
+import glob
+from phone_number_filler import PhoneNumberFiller
+
+filler = PhoneNumberFiller(prefix='100')
+files = glob.glob('./data/*.xlsx')
+
+for file in files:
+    print(f"处理文件: {file}")
+    result = filler.process_file(file)
+    if result['success']:
+        print(f"  ✅ 完成: {result['filled_count']} 个号码")
+    else:
+        print(f"  ❌ 失败: {result['message']}")
+```
+
+---
+
+## 8. 测试与校验
 
 ### 快速测试
 

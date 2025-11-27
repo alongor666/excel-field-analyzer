@@ -45,3 +45,6 @@ config.local.json
 # Test outputs
 test_output/
 test_output_excel/
+*_filled.csv
+*_filled.xlsx
+*_filled.xls
