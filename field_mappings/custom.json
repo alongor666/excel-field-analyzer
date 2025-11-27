@@ -422,6 +422,90 @@
       "group": "finance",
       "dtype": "number",
       "description": "签单保费 [组:finance, 类型:number]"
+    },
+    "商业险保费": {
+      "en_name": "commercial_premium",
+      "group": "finance",
+      "dtype": "number",
+      "description": "商业险保费 (exact match)"
+    },
+    "交强险保费": {
+      "en_name": "compulsory_premium",
+      "group": "finance",
+      "dtype": "number",
+      "description": "交强险保费 (exact match)"
+    },
+    "四级机构": {
+      "en_name": "level_4_organization",
+      "group": "organization",
+      "dtype": "string",
+      "description": "四级机构 (exact match)"
+    },
+    "确认时间": {
+      "en_name": "confirmation_time",
+      "group": "time",
+      "dtype": "datetime",
+      "description": "确认时间 (exact match)"
+    },
+    "起保日期": {
+      "en_name": "date",
+      "group": "time",
+      "dtype": "datetime",
+      "description": "起保日期 (auto-generated)"
+    },
+    "车型": {
+      "en_name": "vehicle_model",
+      "group": "vehicle",
+      "dtype": "string",
+      "description": "车型 (exact match)"
+    },
+    "险类": {
+      "en_name": "insurance_class",
+      "group": "product",
+      "dtype": "string",
+      "description": "险类 (exact match)"
+    },
+    "续保标识": {
+      "en_name": "renewal_flag",
+      "group": "flag",
+      "dtype": "boolean",
+      "description": "续保标识 (exact match)"
+    },
+    "新能源标识": {
+      "en_name": "flag",
+      "group": "flag",
+      "dtype": "boolean",
+      "description": "新能源标识 (auto-generated)"
+    },
+    "客户姓名": {
+      "en_name": "customer",
+      "group": "customer",
+      "dtype": "string",
+      "description": "客户姓名 (auto-generated)"
+    },
+    "联系电话": {
+      "en_name": "phone",
+      "group": "customer",
+      "dtype": "string",
+      "description": "联系电话 (exact match)"
+    },
+    "身份证号": {
+      "en_name": "number",
+      "group": "general",
+      "dtype": "datetime",
+      "description": "身份证号 (auto-generated)"
+    },
+    "投保金额": {
+      "en_name": "amount",
+      "group": "finance",
+      "dtype": "number",
+      "description": "投保金额 (auto-generated)"
+    },
+    "投保日期": {
+      "en_name": "date",
+      "group": "time",
+      "dtype": "datetime",
+      "description": "投保日期 (auto-generated)"
     }
   },
   "learn_history": [
@@ -774,6 +858,76 @@
       "cn_field": "签单保费",
       "en_name": "premium_signing_yuan",
       "learned_at": "2025-11-23T20:46:10.679489"
+    },
+    {
+      "cn_field": "商业险保费",
+      "en_name": "commercial_premium",
+      "learned_at": "2025-11-27T03:59:26.613277"
+    },
+    {
+      "cn_field": "交强险保费",
+      "en_name": "compulsory_premium",
+      "learned_at": "2025-11-27T03:59:26.614842"
+    },
+    {
+      "cn_field": "四级机构",
+      "en_name": "level_4_organization",
+      "learned_at": "2025-11-27T03:59:26.616443"
+    },
+    {
+      "cn_field": "确认时间",
+      "en_name": "confirmation_time",
+      "learned_at": "2025-11-27T03:59:26.618236"
+    },
+    {
+      "cn_field": "起保日期",
+      "en_name": "date",
+      "learned_at": "2025-11-27T03:59:26.620298"
+    },
+    {
+      "cn_field": "车型",
+      "en_name": "vehicle_model",
+      "learned_at": "2025-11-27T03:59:26.622069"
+    },
+    {
+      "cn_field": "险类",
+      "en_name": "insurance_class",
+      "learned_at": "2025-11-27T03:59:26.623668"
+    },
+    {
+      "cn_field": "续保标识",
+      "en_name": "renewal_flag",
+      "learned_at": "2025-11-27T03:59:26.625612"
+    },
+    {
+      "cn_field": "新能源标识",
+      "en_name": "flag",
+      "learned_at": "2025-11-27T03:59:26.627189"
+    },
+    {
+      "cn_field": "客户姓名",
+      "en_name": "customer",
+      "learned_at": "2025-11-27T04:01:47.472840"
+    },
+    {
+      "cn_field": "联系电话",
+      "en_name": "phone",
+      "learned_at": "2025-11-27T04:01:47.474589"
+    },
+    {
+      "cn_field": "身份证号",
+      "en_name": "number",
+      "learned_at": "2025-11-27T04:01:47.476266"
+    },
+    {
+      "cn_field": "投保金额",
+      "en_name": "amount",
+      "learned_at": "2025-11-27T04:01:47.477958"
+    },
+    {
+      "cn_field": "投保日期",
+      "en_name": "date",
+      "learned_at": "2025-11-27T04:01:47.479579"
     }
   ]
 }
